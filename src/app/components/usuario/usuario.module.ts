@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsuarioRoutingModule } from './usuario-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 // Componentes
 import { LoginComponent } from './login/login.component';
@@ -14,7 +15,8 @@ import { VerificarCorreoComponent } from './verificar-correo/verificar-correo.co
   declarations: [LoginComponent, RegisterComponent, RecuperarPasswordComponent, VerificarCorreoComponent],
   imports: [
     CommonModule,
-    UsuarioRoutingModule
+    UsuarioRoutingModule,
+    SharedModule
   ]
 })
 export class UsuarioModule { }
