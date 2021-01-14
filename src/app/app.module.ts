@@ -12,6 +12,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
   declarations: [
     AppComponent,
     InicioComponent
+    
   ],
   imports: [
     BrowserModule,
