@@ -4,18 +4,37 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center titulo">Registrar Usuario</h3>
-                    <form>
+                    <form [formGroup]="registerForm" (ngSubmit)="register()">
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" placeholder="Correo">
+                            <input type="text" formControlName="usuario" class="form-control form-control-lg"
+                                placeholder="Correo">
+                            <span class="text-danger"
+                                *ngIf="registerForm.get('usuario')?.hasError('required') && registerForm.get('usuario')?.touched">
+                                El Correo <strong>es requerido</strong>
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="registerForm.get('usuario')?.hasError('email') && registerForm.get('usuario')?.touched">
+                                Correo <strong>invalido</strong>
+                            </span>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" placeholder="Contraseña">
+                            <input type="text" formControlName="passowrd" class="form-control form-control-lg"
+                                placeholder="Contraseña">
+                            <span class="text-danger"
+                                *ngIf="registerForm.get('passowrd')?.hasError('required') && registerForm.get('passowrd')?.touched">
+                                La Contraseña <strong>es requerida</strong>
+                            </span>
+                            <span class="text-danger"
+                            *ngIf="registerForm.get('passowrd')?.hasError('minlength') && registerForm.get('passowrd')?.touched">
+                            La Contraseña como minimo <strong>debe tener 6 caracteres</strong>
+                        </span>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" placeholder="Repetir Contraseña">
+                            <input type="text" formControlName="repetirPassword" class="form-control form-control-lg"
+                                placeholder="Repetir Contraseña">
                         </div>
                         <button routerLink="/usuario" class="btn btn-secondary btn-lg">Volver</button>
-                        <button class="btn btn-primary btn-lg float-end">Aceptar</button>
+                        <button type="submit" class="btn btn-primary btn-lg float-end">Aceptar</button>
                     </form>
                 </div>
             </div>
