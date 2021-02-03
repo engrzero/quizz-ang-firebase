@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,9 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   constructor(private fb: FormBuilder,
-              private afAuth: AngularFireAuth) { 
+              private afAuth: AngularFireAuth,
+              private _errorService: ErrorService,
+              private toastr: ToastrService) { 
     this.loginForm = this.fb.group({
       usuario: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     }, error => {
       this.loading = false;
-      console.log(error);
+      this.toastr.error(this._errorService.error(error.code), 'Error')
       this.loginForm.reset();
     })
 
