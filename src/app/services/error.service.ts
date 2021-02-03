@@ -28,7 +28,7 @@ export class ErrorService {
 
       case 'auth/wrong-password':
         return 'La Contraseña es invalida'
-
+        
       default:
         return 'Error desconocido';
     }
