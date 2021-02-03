@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/usuario/verificarCorreo'])
       } else {
         // Lo redireccionamos al dahsboard
-
+        this.router.navigate(['/dashboard'])
       }
      
       this.loading = false;

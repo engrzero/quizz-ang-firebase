@@ -8,6 +8,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardModule } from './components/dashboard/dashboard.module';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
