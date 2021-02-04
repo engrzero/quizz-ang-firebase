@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CrearQuizzComponent implements OnInit {
   cuestionarioForm: FormGroup;
+  mostrarError = false;
 
   constructor(private fb: FormBuilder) { 
     this.cuestionarioForm = this.fb.group({
@@ -20,7 +21,15 @@ export class CrearQuizzComponent implements OnInit {
   }
 
   siguiente() {
-    console.log(this.cuestionarioForm);
+    
+    if(this.cuestionarioForm.invalid) {
+
+      // Mostrar el error por 3 segundos
+      this.mostrarError = true;
+      setTimeout(() => {
+        this.mostrarError = false;
+      }, 3000);
+    }
   }
 
 }
