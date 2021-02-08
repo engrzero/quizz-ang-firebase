@@ -60,6 +60,7 @@ export class CrearPreguntasComponent implements OnInit {
   esCorrecta(index: string) {
     let stringRta = 'respuesta';
     let nroRespuesta = stringRta.concat(index);
+    this.setFalseRespuestas(nroRespuesta)
 
     const estadoRta = this.obtenerEstadoRespuesta(nroRespuesta)
 
@@ -70,6 +71,21 @@ export class CrearPreguntasComponent implements OnInit {
 
   obtenerEstadoRespuesta(nroRespuesta: string): boolean {
     return this.agregarPregunta.get(nroRespuesta)?.get('esCorrecta')?.value;
+  }
+
+  setFalseRespuestas(nroRespuestas: string) {
+    const array = ['respuesta1','respuesta2','respuesta3','respuesta4'];
+
+    // Recorremos el array y seteamos TOAS las respuestas como false MENOS la que el usuario selecciono
+    for (let i = 0; i < array.length; i++) {
+      if(array[i] !== nroRespuestas) {
+        this.agregarPregunta.get(array[i])?.patchValue({
+          esCorrecta: false
+        })
+      }
+      
+    }
+
   }
 
 }
