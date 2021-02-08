@@ -39,8 +39,16 @@ export class CrearPreguntasComponent implements OnInit {
     console.log('descripcion', this._quizzService.descripcion);
   }
 
+  get seg() { return this.agregarPregunta.get('segundos')?.value }
+
   agregarPreg() {
     console.log(this.agregarPregunta);
+  }
+
+  sumarRestarSegundos(numero: number) {
+    this.agregarPregunta.patchValue({
+      segundos: this.seg + numero
+    })
   }
 
 }
