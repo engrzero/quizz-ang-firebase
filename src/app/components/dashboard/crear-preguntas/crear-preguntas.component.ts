@@ -46,12 +46,23 @@ export class CrearPreguntasComponent implements OnInit {
   agregarPreg() {
     console.log(this.agregarPregunta);
 
-    if(this.agregarPregunta.invalid) {
+    if(this.agregarPregunta.invalid || this.todasIncorrectas()) {
       this.error();
       return;
     }
 
-    console.log('hola')
+  }
+
+  todasIncorrectas() {
+    const array = ['respuesta1','respuesta2','respuesta3','respuesta4']
+    
+    for (let i = 0; i < array.length; i++) {
+        if(this.agregarPregunta.get(array[i])?.get('esCorrecta')?.value == true) {
+          return false;
+        }      
+    }
+
+    return true;
   }
 
   error() {
