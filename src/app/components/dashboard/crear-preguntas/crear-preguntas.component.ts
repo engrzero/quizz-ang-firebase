@@ -46,7 +46,6 @@ export class CrearPreguntasComponent implements OnInit {
   get puntos() { return this.agregarPregunta.get('puntos')?.value }
 
   agregarPreg() {
-    console.log(this.agregarPregunta);
 
     if(this.agregarPregunta.invalid || this.todasIncorrectas()) {
       this.error();
@@ -115,7 +114,7 @@ export class CrearPreguntasComponent implements OnInit {
         listRespuestas: listRespuestas
       }
 
-      console.log(pregunta);
+      this._quizzService.agregarPregunta(pregunta);
       this.reset();
 
   }
