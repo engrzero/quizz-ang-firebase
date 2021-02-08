@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Pregunta } from 'src/app/models/Pregunta';
+import { Respuesta } from 'src/app/models/Respuesta';
 import { QuizzService } from 'src/app/services/quizz.service';
 
 @Component({
@@ -50,6 +52,70 @@ export class CrearPreguntasComponent implements OnInit {
       this.error();
       return;
     }
+
+    let listRespuestas: Respuesta[] = [];
+
+    // Obtenemos respuesta 1
+    const rtaTitulo1 = this.agregarPregunta.get('respuesta1')?.get('titulo')?.value;
+    const esCorrecta1 = this.agregarPregunta.get('respuesta1')?.get('esCorrecta')?.value;
+
+    const respuesta1: Respuesta = {
+      descripcion: rtaTitulo1,
+      esCorrecta: esCorrecta1,
+    }
+
+    listRespuestas.push(respuesta1);
+
+    // Obtenemos respuesta 2
+    const rtaTitulo2 = this.agregarPregunta.get('respuesta2')?.get('titulo')?.value;
+    const esCorrecta2 = this.agregarPregunta.get('respuesta2')?.get('esCorrecta')?.value;
+
+    const respuesta2: Respuesta = {
+      descripcion: rtaTitulo2,
+      esCorrecta: esCorrecta2,
+    }
+
+    listRespuestas.push(respuesta2);
+
+     // Obtenemos respuesta 3
+     const rtaTitulo3= this.agregarPregunta.get('respuesta3')?.get('titulo')?.value;
+     const esCorrecta3 = this.agregarPregunta.get('respuesta3')?.get('esCorrecta')?.value;
+ 
+     const respuesta3: Respuesta = {
+       descripcion: rtaTitulo3,
+       esCorrecta: esCorrecta3,
+     }
+ 
+     if(rtaTitulo3 !== ''){
+       listRespuestas.push(respuesta3);
+     }
+
+      // Obtenemos respuesta 4
+      const rtaTitulo4 = this.agregarPregunta.get('respuesta4')?.get('titulo')?.value;
+      const esCorrecta4 = this.agregarPregunta.get('respuesta4')?.get('esCorrecta')?.value;
+  
+      const respuesta4: Respuesta = {
+        descripcion: rtaTitulo4,
+        esCorrecta: esCorrecta4,
+      }
+  
+      if(rtaTitulo4 !== ''){
+        listRespuestas.push(respuesta4);
+      }
+
+      // Creamos pregunta
+      const tituloPregunta = this.agregarPregunta.get('titulo')?.value;
+      const segundos = this.agregarPregunta.get('segundos')?.value;
+      const puntos = this.agregarPregunta.get('puntos')?.value;
+
+      const pregunta: Pregunta = {
+        titulo: tituloPregunta,
+        segundos: segundos,
+        puntos: puntos,
+        listRespuestas: listRespuestas
+      }
+
+      console.log(pregunta);
 
   }
 
