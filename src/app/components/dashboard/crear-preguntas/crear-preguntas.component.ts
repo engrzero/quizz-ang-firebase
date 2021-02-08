@@ -9,6 +9,7 @@ import { QuizzService } from 'src/app/services/quizz.service';
 })
 export class CrearPreguntasComponent implements OnInit {
   agregarPregunta: FormGroup;
+  mostrarError = false;
 
   constructor(private _quizzService: QuizzService, private fb: FormBuilder) { 
     this.agregarPregunta = this.fb.group({
@@ -44,6 +45,22 @@ export class CrearPreguntasComponent implements OnInit {
 
   agregarPreg() {
     console.log(this.agregarPregunta);
+
+    if(this.agregarPregunta.invalid) {
+      this.error();
+      return;
+    }
+
+    console.log('hola')
+  }
+
+  error() {
+    this.mostrarError = true;
+
+    // Mostramos por tres segundos el error
+    setTimeout(() => {
+      this.mostrarError = false
+    }, 3000);
   }
 
   sumarRestarSegundos(numero: number) {
