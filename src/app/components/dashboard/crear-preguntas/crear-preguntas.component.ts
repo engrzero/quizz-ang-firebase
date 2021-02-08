@@ -116,7 +116,32 @@ export class CrearPreguntasComponent implements OnInit {
       }
 
       console.log(pregunta);
+      this.reset();
 
+  }
+
+  reset() {
+    this.agregarPregunta.patchValue({
+      titulo: '',
+      segundos: 10,
+      puntos: 1000,
+      respuesta1: {
+        titulo: '',
+        esCorrecta: false
+      },
+      respuesta2: {
+        titulo: '',
+        esCorrecta: false
+      },
+      respuesta3: {
+        titulo: '',
+        esCorrecta: false
+      },
+      respuesta4: {
+        titulo: '',
+        esCorrecta: false
+      },
+    })
   }
 
   todasIncorrectas() {
