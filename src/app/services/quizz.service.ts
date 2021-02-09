@@ -30,5 +30,9 @@ export class QuizzService {
     return this._firestore.collection('cuestionarios', ref => ref.where('uid', '==', uid)).snapshotChanges()
   }
 
+  eliminarCuestionario(idCuestionario: string): Promise<any> {
+   return this._firestore.collection('cuestionarios').doc(idCuestionario).delete()
+  }
+
 
 }
