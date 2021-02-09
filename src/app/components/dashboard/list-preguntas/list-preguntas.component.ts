@@ -16,7 +16,7 @@ export class ListPreguntasComponent implements OnInit {
   listPreguntas: Pregunta[] = [];
   tituloCuestionario: string;
   descripcionCuestionario: string;
-
+  loading = false;
   constructor(private _quizzService: QuizzService, 
               private router: Router, 
               private toastr: ToastrService) {
@@ -53,10 +53,13 @@ export class ListPreguntasComponent implements OnInit {
       listPreguntas: this.listPreguntas
     }
     console.log(cuestionario);
+
+    this.loading = true;
     this._quizzService.crearCuestionario(cuestionario).then(data => {
       this.toastr.success('El Cuestionario fue registrado con exito!', 'Cuestionario Registrado')
       this.router.navigate(['/dashboard'])
     }).catch(error => {
+      this.loading = false;
       console.log(error);
     })
   }
