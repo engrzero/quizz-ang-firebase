@@ -53,9 +53,12 @@ export class ListPreguntasComponent implements OnInit {
       listPreguntas: this.listPreguntas
     }
     console.log(cuestionario);
-    this.toastr.success('El Cuestionario fue registrado con exito!', 'Cuestionario Registrado')
-    this.router.navigate(['/dashboard'])
-
+    this._quizzService.crearCuestionario(cuestionario).then(data => {
+      this.toastr.success('El Cuestionario fue registrado con exito!', 'Cuestionario Registrado')
+      this.router.navigate(['/dashboard'])
+    }).catch(error => {
+      console.log(error);
+    })
   }
 
   generarCodigo(): string {
