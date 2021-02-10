@@ -53,7 +53,7 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
           ...element.payload.doc.data()
         })
       });
-      console.log(this.listCuestionarios)
+     
     }, error => {
       console.log(error);
       this.toastr.error('Opss.. ocurrio un error', 'Error');
