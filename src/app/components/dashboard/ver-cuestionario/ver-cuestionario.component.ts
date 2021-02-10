@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cuestionario } from 'src/app/models/Cuestionario';
 import { QuizzService } from 'src/app/services/quizz.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { QuizzService } from 'src/app/services/quizz.service';
 })
 export class VerCuestionarioComponent implements OnInit {
   id: string;
+  loading = false;
+  cuestionario: Cuestionario | undefined;
 
   constructor(private _quizzService: QuizzService,
               private aRoute: ActivatedRoute) { 
@@ -20,10 +23,14 @@ export class VerCuestionarioComponent implements OnInit {
   }
 
   obtenerQuizz() {
+    this.loading = true;
+    
     this._quizzService.getCuestionario(this.id).subscribe(doc =>{
-      console.log(doc.data());
+      this.cuestionario = doc.data();
+      this.loading = false;
     }, error =>{
       console.log(error);
+      this.loading = false;
     })
   }
 
