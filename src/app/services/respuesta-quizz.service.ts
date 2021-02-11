@@ -9,6 +9,8 @@ import { Cuestionario } from '../models/Cuestionario';
 export class RespuestaQuizzService {
 
   cuestionario: Cuestionario | undefined;
+  nombreParticipante = '';
+
   constructor(private _firestore: AngularFirestore) { }
 
   searchByCode(code: string): Observable<any> {
