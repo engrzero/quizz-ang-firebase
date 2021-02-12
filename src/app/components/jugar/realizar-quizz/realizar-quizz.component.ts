@@ -84,7 +84,7 @@ export class RealizarQuizzComponent implements OnInit {
     // Creamos objeto respuesta y lo agregamos al array
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listPreguntas[this.indexPregunta].titulo,
-      puntosObtenidos: '',
+      puntosObtenidos: this.obtenemosPuntosPregunta(),
       segundos: '',
       indexRespuestaSeleccionada: '',
       listRepuestas: this.cuestionario.listPreguntas[this.indexPregunta].listRespuestas,
@@ -105,6 +105,25 @@ export class RealizarQuizzComponent implements OnInit {
     } else {
       this.indexPregunta++;
       this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
+    }
+  }
+
+  obtenemosPuntosPregunta(): number {
+
+    // si el usuario no selecciono ninguna pregunta..
+    if(this.opcionSeleccionada === undefined) {
+      return 0;
+    }
+
+    const puntosPregunta = this.cuestionario.listPreguntas[this.indexPregunta].puntos;
+
+    // Validamos si la pregunta es correcta
+    if(this.opcionSeleccionada.esCorrecta == true) {
+      // incrementamos la variable puntosTotales..
+      this.puntosTotales = this.puntosTotales + puntosPregunta;
+      return puntosPregunta;
+    } else {
+      return 0;
     }
   }
 
