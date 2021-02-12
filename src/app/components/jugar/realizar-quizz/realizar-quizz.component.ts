@@ -81,12 +81,15 @@ export class RealizarQuizzComponent implements OnInit {
 
   agregarRespuesta() {
 
+    // Incrementamos contadores(Correcta y incorrecta)
+    this.contadorCorrectaIncorrecta();
+
     // Creamos objeto respuesta y lo agregamos al array
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listPreguntas[this.indexPregunta].titulo,
       puntosObtenidos: this.obtenemosPuntosPregunta(),
-      segundos: '',
-      indexRespuestaSeleccionada: '',
+      segundos: this.obtenemosSegundos(),
+      indexRespuestaSeleccionada: this.obtenemosIndexSeleccionado(),
       listRepuestas: this.cuestionario.listPreguntas[this.indexPregunta].listRespuestas,
     }
     this.listRespuestaUsuario.push(respuestaUsuario);
@@ -100,6 +103,7 @@ export class RealizarQuizzComponent implements OnInit {
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta) {
       // guardamos las respuestas en firebase
       // redireccionamos al proximo componente
+      console.log(this.listRespuestaUsuario);
       this.router.navigate(['/jugar/respuestaUsuario']);
 
     } else {
@@ -124,6 +128,44 @@ export class RealizarQuizzComponent implements OnInit {
       return puntosPregunta;
     } else {
       return 0;
+    }
+  }
+
+  obtenemosSegundos(): string {
+
+    // Validamos si el usuario no respondio la pregunta
+    if(this.opcionSeleccionada === undefined) {
+      return 'NO RESPONDIO';
+    } else {
+
+      const segundosPregunta = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
+      const segundosRespondidos = segundosPregunta - this.segundos;
+
+      return segundosRespondidos.toString();
+    }
+  }
+
+  obtenemosIndexSeleccionado(): any {
+    if(this.opcionSeleccionada === undefined) {
+      return '';
+    } else {
+      return this.indexSeleccionado;
+    }
+  }
+
+  contadorCorrectaIncorrecta(){ 
+
+    // Validamos si el usuario selecciono pregunta
+    if(this.opcionSeleccionada === undefined) {
+      this.cantidadIncorrectas++;
+      return;
+    }
+
+    // Preguntamos si la opcion es INCORRECTA
+    if(this.opcionSeleccionada.esCorrecta === false) {
+      this.cantidadIncorrectas++;
+    } else {
+      this.cantidadCorrectas++;
     }
   }
 
