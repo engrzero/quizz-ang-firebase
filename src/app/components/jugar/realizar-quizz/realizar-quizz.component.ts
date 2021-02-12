@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cuestionario } from 'src/app/models/Cuestionario';
 import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service';
@@ -8,7 +8,7 @@ import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service'
   templateUrl: './realizar-quizz.component.html',
   styleUrls: ['./realizar-quizz.component.css']
 })
-export class RealizarQuizzComponent implements OnInit {
+export class RealizarQuizzComponent implements OnInit, OnDestroy {
   cuestionario!: Cuestionario;
   nombreParticipante = '';
   indexPregunta = 0;
@@ -31,6 +31,10 @@ export class RealizarQuizzComponent implements OnInit {
     this.nombreParticipante = this._respuestaQuizzService.nombreParticipante;
     this.validateRefresh();
     this.iniciarContador();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.setInterval);
   }
 
   validateRefresh() {
