@@ -7,10 +7,10 @@
             <h3 class="titulo">{{  obtenerTitulo() }}</h3>
             <div class="col-lg-6 offset-lg-3">
                 <ul class="list-group mt-3">
-                    <li class="list-group-item">Lima</li>
-                    <li class="list-group-item classSeleccionada">Buenos Aires</li>
-                    <li class="list-group-item">Caracas</li>
-                    <li class="list-group-item">Bogota</li>
+                    <li *ngFor="let respuesta of cuestionario.listPreguntas[1].listRespuestas" 
+                        class="list-group-item animate__animated animate__fadeIn">
+                        {{ respuesta.descripcion }}
+                    </li>
                 </ul>
                 <button class="btn-principal btn-aceptar mt-3">ACEPTAR</button>
             </div>

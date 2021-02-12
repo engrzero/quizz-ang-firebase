@@ -28,11 +28,11 @@ export class RealizarQuizzComponent implements OnInit {
   }
 
   obtenerSegundos(): number {
-    return this.cuestionario.listPreguntas[0].segundos;
+    return this.cuestionario.listPreguntas[1].segundos;
   }
 
   obtenerTitulo(): string {
-    return this.cuestionario.listPreguntas[0].titulo;
+    return this.cuestionario.listPreguntas[1].titulo;
   }
 
 }
