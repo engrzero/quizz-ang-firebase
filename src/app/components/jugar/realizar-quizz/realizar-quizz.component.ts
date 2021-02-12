@@ -102,8 +102,9 @@ export class RealizarQuizzComponent implements OnInit {
     // Validamos si es la ultima pregunta
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta) {
       // guardamos las respuestas en firebase
+      this.guardamosRespuestaCuestionario()
+
       // redireccionamos al proximo componente
-      console.log(this.listRespuestaUsuario);
       this.router.navigate(['/jugar/respuestaUsuario']);
 
     } else {
@@ -167,6 +168,21 @@ export class RealizarQuizzComponent implements OnInit {
     } else {
       this.cantidadCorrectas++;
     }
+  }
+
+  guardamosRespuestaCuestionario() {
+
+    const respuestaCuestionario: any = {
+      idCuestionario: this.cuestionario.id,
+      nombreParticipante: this.nombreParticipante,
+      fecha: new Date(),
+      cantidadPreguntas: this.cuestionario.cantPreguntas,
+      cantidadCorrectas: this.cantidadCorrectas,
+      cantidadIncorrectas: this.cantidadIncorrectas,
+      puntosTotales: this.puntosTotales,
+      listRespuestaUsuario: this.listRespuestaUsuario
+    }
+    console.log(respuestaCuestionario);
   }
 
 }
