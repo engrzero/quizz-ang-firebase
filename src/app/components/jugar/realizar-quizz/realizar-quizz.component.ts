@@ -15,6 +15,10 @@ export class RealizarQuizzComponent implements OnInit {
   segundos = 0;
   setInterval: any;
 
+  // Respuesta usuario
+  opcionSeleccionada: any;
+  indexSeleccionado: any;
+
   constructor(private _respuestaQuizzService: RespuestaQuizzService,
               private router: Router) { }
 
@@ -22,7 +26,7 @@ export class RealizarQuizzComponent implements OnInit {
     this.cuestionario = this._respuestaQuizzService.cuestionario;
     this.nombreParticipante = this._respuestaQuizzService.nombreParticipante;
     this.validateRefresh();
-    this.iniciarContador();
+    // this.iniciarContador();
   }
 
   validateRefresh() {
@@ -52,6 +56,19 @@ export class RealizarQuizzComponent implements OnInit {
 
       this.segundos = this.segundos - 1;
     }, 1000)
+  }
+
+  respuestaSeleccionada(respuesta: any, index: number) {
+    this.opcionSeleccionada = respuesta;
+    this.indexSeleccionado = index;
+  }
+
+  addClassOption(respuesta: any): string {
+    if(respuesta === this.opcionSeleccionada) {
+      return 'classSeleccionada'
+    } else {
+      return ''
+    }
   }
 
 }
