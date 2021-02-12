@@ -18,6 +18,10 @@ export class RealizarQuizzComponent implements OnInit {
   // Respuesta usuario
   opcionSeleccionada: any;
   indexSeleccionado: any;
+  cantidadCorrectas = 0;
+  cantidadIncorrectas = 0;
+  puntosTotales = 0;
+  listRespuestaUsuario: any[] = [];
 
   constructor(private _respuestaQuizzService: RespuestaQuizzService,
               private router: Router) { }
@@ -76,6 +80,21 @@ export class RealizarQuizzComponent implements OnInit {
   }
 
   agregarRespuesta() {
+
+    // Creamos objeto respuesta y lo agregamos al array
+    const respuestaUsuario: any = {
+      titulo: this.cuestionario.listPreguntas[this.indexPregunta].titulo,
+      puntosObtenidos: '',
+      segundos: '',
+      indexRespuestaSeleccionada: '',
+      listRepuestas: this.cuestionario.listPreguntas[this.indexPregunta].listRespuestas,
+    }
+    this.listRespuestaUsuario.push(respuestaUsuario);
+
+
+    this.opcionSeleccionada = undefined;
+    this.indexSeleccionado = undefined;
+
 
     // Validamos si es la ultima pregunta
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta) {
