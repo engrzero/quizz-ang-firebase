@@ -26,7 +26,7 @@ export class RealizarQuizzComponent implements OnInit {
     this.cuestionario = this._respuestaQuizzService.cuestionario;
     this.nombreParticipante = this._respuestaQuizzService.nombreParticipante;
     this.validateRefresh();
-    // this.iniciarContador();
+    this.iniciarContador();
   }
 
   validateRefresh() {
@@ -49,9 +49,7 @@ export class RealizarQuizzComponent implements OnInit {
    this.setInterval = setInterval(() => {
 
       if(this.segundos === 0) {
-        this.indexPregunta++;
-        clearInterval(this.setInterval);
-        this.iniciarContador();
+        this.agregarRespuesta();
       }
 
       this.segundos = this.segundos - 1;
@@ -68,6 +66,26 @@ export class RealizarQuizzComponent implements OnInit {
       return 'classSeleccionada'
     } else {
       return ''
+    }
+  }
+
+  siguiente() {
+    clearInterval(this.setInterval)
+    this.agregarRespuesta();
+    this.iniciarContador()
+  }
+
+  agregarRespuesta() {
+
+    // Validamos si es la ultima pregunta
+    if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta) {
+      // guardamos las respuestas en firebase
+      // redireccionamos al proximo componente
+      this.router.navigate(['/jugar/respuestaUsuario']);
+
+    } else {
+      this.indexPregunta++;
+      this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
     }
   }
 

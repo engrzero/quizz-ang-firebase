@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RespuestaUsuarioComponent } from '../shared/respuesta-usuario/respuesta-usuario.component';
 
 // Componentes
 import { ContadorInicialComponent } from './contador-inicial/contador-inicial.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: '', component: IngresarNombreComponent },
   { path: 'iniciarContador', component: ContadorInicialComponent },
   { path: 'realizarQuizz', component: RealizarQuizzComponent },
+  { path: 'respuestaUsuario', component: RespuestaUsuarioComponent },
 ];
 
 @NgModule({
