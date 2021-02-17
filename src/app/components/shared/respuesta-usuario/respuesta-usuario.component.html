@@ -46,7 +46,9 @@
                     <div class="card-body text-center">
                         <h3 class="titulo">{{ pregunta.titulo }}</h3>
                         <ul class="list-group">
-                            <li *ngFor="let respuesta of pregunta.listRepuestas" class="list-group-item">
+                            <li *ngFor="let respuesta of pregunta.listRepuestas; let i = index" class="list-group-item"
+                            [ngClass]="{ 'classCorrecta': respuesta.esCorrecta === true && i === pregunta.indexRespuestaSeleccionada,
+                                        'classIncorrecta': respuesta.esCorrecta === false && i === pregunta.indexRespuestaSeleccionada }">
                                 {{ respuesta.descripcion }}
                             </li>
                         </ul>
