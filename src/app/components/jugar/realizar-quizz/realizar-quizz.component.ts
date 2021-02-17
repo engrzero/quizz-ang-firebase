@@ -14,6 +14,7 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   indexPregunta = 0;
   segundos = 0;
   setInterval: any;
+  loading = false;
 
   // Respuesta usuario
   opcionSeleccionada: any;
@@ -108,8 +109,7 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       // guardamos las respuestas en firebase
       this.guardamosRespuestaCuestionario()
 
-      // redireccionamos al proximo componente
-      this.router.navigate(['/jugar/respuestaUsuario']);
+     
 
     } else {
       this.indexPregunta++;
@@ -186,7 +186,19 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       puntosTotales: this.puntosTotales,
       listRespuestaUsuario: this.listRespuestaUsuario
     }
-    console.log(respuestaCuestionario);
+    
+    this.loading = true;
+    // Alamacenamos la respuesta en firebase
+    this._respuestaQuizzService.setRespuestaUsuario(respuestaCuestionario).then(data => {
+      console.log(data);
+
+       // redireccionamos al proximo componente
+       this.router.navigate(['/jugar/respuestaUsuario', data.id]);
+    }, error => {
+      console.log(error);
+      this.router.navigate(['/']);
+    })
+
   }
 
 }
