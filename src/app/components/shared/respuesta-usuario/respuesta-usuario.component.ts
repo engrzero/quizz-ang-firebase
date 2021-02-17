@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class RespuestaUsuarioComponent implements OnInit {
   respuestaCuestionario: any;
 
   constructor(private _respuestaUsuarioService: RespuestaQuizzService,
-              private aRoute: ActivatedRoute) {
+              private aRoute: ActivatedRoute,
+              private router: Router) {
     this.id = this.aRoute.snapshot.paramMap.get('id')!;
    }
 
@@ -24,13 +25,21 @@ export class RespuestaUsuarioComponent implements OnInit {
   obtenerRespuestaUsuario() {
     this.loading = true;
     this._respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(doc => {
-      console.log(doc.data());
+      console.log(doc);
+      if(!doc.exists) {
+        this.router.navigate(['/']);
+        return;
+      }
       this.respuestaCuestionario = doc.data();
       this.loading = false;
     }, error => {
       console.log(error);
       this.loading = false;
     })
+  }
+
+  volver() {
+    this.router.navigate(['/']);
   }
 
 }
