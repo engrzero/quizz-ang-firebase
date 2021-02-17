@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service';
 
@@ -15,7 +16,8 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
   respuestasQuizz: Subscription = new Subscription();
 
   constructor(private aRoute: ActivatedRoute,
-              private _respuestaUsuarioService: RespuestaQuizzService) {
+              private _respuestaUsuarioService: RespuestaQuizzService,
+              private toastr: ToastrService) {
     this.id = this.aRoute.snapshot.paramMap.get('id')!;
   }
 
@@ -44,6 +46,18 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
       this.loading = false;
+    })
+  }
+
+  eliminarRespuestaUsuario(id: string) {
+    this.loading = true;
+
+    this._respuestaUsuarioService.deleteRespuestaUsuario(id).then(() => {
+      this.loading = false;
+      this.toastr.info('La respuesta fue eliminada', 'Respuesta Eliminada')
+    }, error => {
+      console.log(error);
+      this.toastr.error('Opss.. ocurrio un error', 'Error');
     })
   }
 
